@@ -1,5 +1,7 @@
 package DeliveryDelay;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.jms.Connection;
@@ -72,12 +74,12 @@ public class QueueConsumer {
 			// Step 8.1. Receive the message one
 			TextMessage firstMessage = (TextMessage) messageConsumer.receive();	
 			long first = System.currentTimeMillis();
-			System.out.println("Consumer received message: " + firstMessage.getText() + "\n");
+			System.out.println("Consumer received message: [ "+new Timestamp(new Date(first).getTime())+" ] " + firstMessage.getText() + "\n");
 			
 			// Step 8.2. Receive delayed
 			TextMessage secondMessage = (TextMessage) messageConsumer.receive();	
 			long second = System.currentTimeMillis();
-			System.out.println("Consumer received message: " + secondMessage.getText() + "\n");
+			System.out.println("Consumer received dealyed message: [ "+new Timestamp(new Date(second).getTime())+" ] " + secondMessage.getText() + "\n");
 			
 			System.out.println("Time difference between two messages : "+(second-first)/1000+"s");
 
